@@ -1,109 +1,32 @@
 {
   "info": {
-    "name": "Ecommerce.API",
-    "description": "CRUD requests for Product, Category, and Sale endpoints",
+    "name": "Ecommerce API",
+    "description": "Postman collection for Category, Product, and Sale endpoints.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
     {
-      "key": "base_url",
-      "value": "https://localhost:7146"
-    },
-    {
-      "key": "productId",
-      "value": "1"
+      "key": "baseUrl",
+      "value": "https://localhost:7146",
+      "type": "string"
     },
     {
       "key": "categoryId",
-      "value": "1"
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "productId",
+      "value": "1",
+      "type": "string"
     },
     {
       "key": "saleId",
-      "value": "1"
+      "value": "1",
+      "type": "string"
     }
   ],
   "item": [
-    {
-      "name": "Product",
-      "item": [
-        {
-          "name": "Get All Products",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{base_url}}/api/Product?PageNumber=1&PageSize=10",
-              "host": ["{{base_url}}"],
-              "path": ["api", "Product"],
-              "query": [
-                { "key": "PageNumber", "value": "1" },
-                { "key": "PageSize", "value": "10" }
-              ]
-            }
-          }
-        },
-        {
-          "name": "Get Product By Id",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{base_url}}/api/Product/{{productId}}",
-              "host": ["{{base_url}}"],
-              "path": ["api", "Product", "{{productId}}"]
-            }
-          }
-        },
-        {
-          "name": "Create Product",
-          "request": {
-            "method": "POST",
-            "header": [
-              { "key": "Content-Type", "value": "application/json" }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"Sample Product\",\n  \"description\": \"Sample description\",\n  \"price\": 29.99,\n  \"stockQuantity\": 100,\n  \"categoryId\": 1\n}"
-            },
-            "url": {
-              "raw": "{{base_url}}/api/Product",
-              "host": ["{{base_url}}"],
-              "path": ["api", "Product"]
-            }
-          }
-        },
-        {
-          "name": "Update Product",
-          "request": {
-            "method": "PUT",
-            "header": [
-              { "key": "Content-Type", "value": "application/json" }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"Updated Product\",\n  \"description\": \"Updated description\",\n  \"price\": 34.99,\n  \"stockQuantity\": 80,\n  \"categoryId\": 1\n}"
-            },
-            "url": {
-              "raw": "{{base_url}}/api/Product/{{productId}}",
-              "host": ["{{base_url}}"],
-              "path": ["api", "Product", "{{productId}}"]
-            }
-          }
-        },
-        {
-          "name": "Delete Product",
-          "request": {
-            "method": "DELETE",
-            "header": [],
-            "url": {
-              "raw": "{{base_url}}/api/Product/{{productId}}",
-              "host": ["{{base_url}}"],
-              "path": ["api", "Product", "{{productId}}"]
-            }
-          }
-        }
-      ]
-    },
     {
       "name": "Category",
       "item": [
@@ -113,12 +36,12 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{base_url}}/api/Category?PageNumber=1&PageSize=10",
-              "host": ["{{base_url}}"],
+              "raw": "{{baseUrl}}/api/Category?pageNumber=1&pageSize=10",
+              "host": ["{{baseUrl}}"],
               "path": ["api", "Category"],
               "query": [
-                { "key": "PageNumber", "value": "1" },
-                { "key": "PageSize", "value": "10" }
+                { "key": "pageNumber", "value": "1" },
+                { "key": "pageSize", "value": "10" }
               ]
             }
           }
@@ -129,8 +52,8 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{base_url}}/api/Category/{{categoryId}}",
-              "host": ["{{base_url}}"],
+              "raw": "{{baseUrl}}/api/Category/{{categoryId}}",
+              "host": ["{{baseUrl}}"],
               "path": ["api", "Category", "{{categoryId}}"]
             }
           }
@@ -144,11 +67,11 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"name\": \"Sample Category\",\n  \"description\": \"Sample description\"\n}"
+              "raw": "{\n  \"name\": \"Sporting Goods\",\n  \"description\": \"Sports equipment and accessories\"\n}"
             },
             "url": {
-              "raw": "{{base_url}}/api/Category",
-              "host": ["{{base_url}}"],
+              "raw": "{{baseUrl}}/api/Category",
+              "host": ["{{baseUrl}}"],
               "path": ["api", "Category"]
             }
           }
@@ -162,11 +85,11 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"name\": \"Updated Category\",\n  \"description\": \"Updated description\"\n}"
+              "raw": "{\n  \"name\": \"Sporting Goods Updated\",\n  \"description\": \"Updated description\"\n}"
             },
             "url": {
-              "raw": "{{base_url}}/api/Category/{{categoryId}}",
-              "host": ["{{base_url}}"],
+              "raw": "{{baseUrl}}/api/Category/{{categoryId}}",
+              "host": ["{{baseUrl}}"],
               "path": ["api", "Category", "{{categoryId}}"]
             }
           }
@@ -177,9 +100,90 @@
             "method": "DELETE",
             "header": [],
             "url": {
-              "raw": "{{base_url}}/api/Category/{{categoryId}}",
-              "host": ["{{base_url}}"],
+              "raw": "{{baseUrl}}/api/Category/{{categoryId}}",
+              "host": ["{{baseUrl}}"],
               "path": ["api", "Category", "{{categoryId}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Product",
+      "item": [
+        {
+          "name": "Get All Products",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/Product?pageNumber=1&pageSize=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "Product"],
+              "query": [
+                { "key": "pageNumber", "value": "1" },
+                { "key": "pageSize", "value": "10" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Product By Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/Product/{{productId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "Product", "{{productId}}"]
+            }
+          }
+        },
+        {
+          "name": "Create Product",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Keyboard\",\n  \"description\": \"Mechanical keyboard, RGB backlight\",\n  \"price\": 79.99,\n  \"stockQuantity\": 30,\n  \"categoryId\": 1\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/Product",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "Product"]
+            }
+          }
+        },
+        {
+          "name": "Update Product",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Keyboard Updated\",\n  \"description\": \"Mechanical keyboard, updated\",\n  \"price\": 89.99,\n  \"stockQuantity\": 25,\n  \"categoryId\": 1\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/Product/{{productId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "Product", "{{productId}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete Product",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/Product/{{productId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "Product", "{{productId}}"]
             }
           }
         }
@@ -194,12 +198,12 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{base_url}}/api/Sale?PageNumber=1&PageSize=10",
-              "host": ["{{base_url}}"],
+              "raw": "{{baseUrl}}/api/Sale?pageNumber=1&pageSize=10",
+              "host": ["{{baseUrl}}"],
               "path": ["api", "Sale"],
               "query": [
-                { "key": "PageNumber", "value": "1" },
-                { "key": "PageSize", "value": "10" }
+                { "key": "pageNumber", "value": "1" },
+                { "key": "pageSize", "value": "10" }
               ]
             }
           }
@@ -210,8 +214,8 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{base_url}}/api/Sale/{{saleId}}",
-              "host": ["{{base_url}}"],
+              "raw": "{{baseUrl}}/api/Sale/{{saleId}}",
+              "host": ["{{baseUrl}}"],
               "path": ["api", "Sale", "{{saleId}}"]
             }
           }
@@ -225,11 +229,11 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"productId\": 1,\n  \"quantity\": 2,\n  \"unitPrice\": 29.99,\n  \"customerName\": \"John Doe\"\n}"
+              "raw": "{\n  \"customerName\": \"Alice Johnson\",\n  \"saleDate\": \"2025-01-01T00:00:00\",\n  \"saleItems\": [\n    {\n      \"productId\": 1,\n      \"quantity\": 2,\n      \"unitPrice\": 999.99\n    }\n  ]\n}"
             },
             "url": {
-              "raw": "{{base_url}}/api/Sale",
-              "host": ["{{base_url}}"],
+              "raw": "{{baseUrl}}/api/Sale",
+              "host": ["{{baseUrl}}"],
               "path": ["api", "Sale"]
             }
           }
@@ -243,11 +247,11 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"productId\": 1,\n  \"quantity\": 3,\n  \"unitPrice\": 29.99,\n  \"customerName\": \"Jane Doe\"\n}"
+              "raw": "{\n  \"customerName\": \"Alice Johnson Updated\",\n  \"saleDate\": \"2025-01-02T00:00:00\",\n  \"saleItems\": [\n    {\n      \"productId\": 1,\n      \"quantity\": 3,\n      \"unitPrice\": 999.99\n    }\n  ]\n}"
             },
             "url": {
-              "raw": "{{base_url}}/api/Sale/{{saleId}}",
-              "host": ["{{base_url}}"],
+              "raw": "{{baseUrl}}/api/Sale/{{saleId}}",
+              "host": ["{{baseUrl}}"],
               "path": ["api", "Sale", "{{saleId}}"]
             }
           }
@@ -258,8 +262,8 @@
             "method": "DELETE",
             "header": [],
             "url": {
-              "raw": "{{base_url}}/api/Sale/{{saleId}}",
-              "host": ["{{base_url}}"],
+              "raw": "{{baseUrl}}/api/Sale/{{saleId}}",
+              "host": ["{{baseUrl}}"],
               "path": ["api", "Sale", "{{saleId}}"]
             }
           }
