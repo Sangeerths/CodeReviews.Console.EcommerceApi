@@ -2,6 +2,16 @@
 
 A RESTful Web API for managing an e-commerce catalog — built with **ASP.NET Core** and **Entity Framework Core**. It exposes endpoints for managing **Products**, **Categories**, and **Sales**, with pagination and soft-delete support baked in.
 
+## 🚀 Overview
+
+This project was built to demonstrate a practical e-commerce backend using a clean separation between:
+
+- **API layer** – exposes RESTful endpoints
+- **Service layer** – contains application/business logic
+- **Data layer** – handles database access with Entity Framework Core
+- **DTOs** – separates API contracts from database entities
+- **Console UI** – provides an interactive client for managing the application
+  
 ## Features
 
 - CRUD operations for Products, Categories, and Sales
@@ -16,31 +26,101 @@ A RESTful Web API for managing an e-commerce catalog — built with **ASP.NET Co
 - **Entity Framework Core** (`EcommerceDbContext`)
 - SQL database (via EF Core provider — see `appsettings.json` for connection string)
 
-## Project Structure
+## 🏗️ Architecture
 
+```text
+                    ┌──────────────────────┐
+                    │     ECommerce.UI     │
+                    │  .NET Console Client │
+                    └──────────┬───────────┘
+                               │
+                          HTTP / JSON
+                               │
+                               ▼
+                    ┌──────────────────────┐
+                    │    ASP.NET Core API  │
+                    │      Controllers     │
+                    └──────────┬───────────┘
+                               │
+                               ▼
+                    ┌──────────────────────┐
+                    │      Services        │
+                    │ Business Logic Layer │
+                    └──────────┬───────────┘
+                               │
+                               ▼
+                    ┌──────────────────────┐
+                    │    EF Core / DbContext│
+                    │    Data Access Layer │
+                    └──────────┬───────────┘
+                               │
+                               ▼
+                    ┌──────────────────────┐
+                    │      SQL Server      │
+                    │     EcommerceDb      │
+                    └──────────────────────┘
 ```
+
+
+## 📁 Project Structure
+
+```text
 Ecommerce.API/
-├── Controllers/
-│   ├── ProductController.cs
-│   ├── CategoryController.cs
-│   └── SaleController.cs
-├── Services/
-│   ├── ProductService.cs
-│   ├── CategoryService.cs
-│   └── SaleService.cs
-├── DTO/
-│   ├── Product/
-│   ├── Category/
-│   ├── Sale/
-│   └── Pagination/
-├── Models/
-│   ├── Product.cs
-│   ├── Category.cs
-│   └── Sale.cs
-├── Data/
-│   └── EcommerceDbContext.cs
-└── Program.cs
+│
+├── Ecommerce.API/
+│   │
+│   ├── Controllers/
+│   │   ├── ProductController.cs
+│   │   ├── CategoryController.cs
+│   │   └── SaleController.cs
+│   │
+│   ├── Services/
+│   │   ├── ProductService.cs
+│   │   ├── CategoryService.cs
+│   │   └── SaleService.cs
+│   │
+│   ├── DTO/
+│   │   ├── Product/
+│   │   ├── Category/
+│   │   ├── Sale/
+│   │   └── Pagination/
+│   │
+│   ├── Models/
+│   │   ├── Product.cs
+│   │   ├── Category.cs
+│   │   ├── Sale.cs
+│   │   └── SaleItem.cs
+│   │
+│   ├── Data/
+│   │   └── EcommerceDbContext.cs
+│   │
+│   ├── Program.cs
+│   ├── appsettings.json
+│   └── Ecommerce.API.csproj
+│
+├── ECommerce.UI/
+│   │
+│   ├── Menu/
+│   │   ├── MenuUI.cs
+│   │   └── ConsoleHelper.cs
+│   │
+│   ├── Services/
+│   │   ├── ProductApiService.cs
+│   │   ├── CategoryApiService.cs
+│   │   └── SaleApiService.cs
+│   │
+│   ├── DTO/
+│   ├── Program.cs
+│   ├── appsettings.json
+│   └── ECommerce.UI.csproj
+│
+├── Ecommerce.API.postman_collection.json
+├── Ecommerce.API.slnx
+└── README.md
 ```
+
+The solution file contains both the API and console client projects.
+
 
 ## Getting Started
 
@@ -51,11 +131,13 @@ Ecommerce.API/
 
 ### Setup
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/Sangeerths/Ecommerce.API.git
-   cd Ecommerce.API
-   ```
+## 1. Clone the Repository
+
+```bash
+git clone https://github.com/Sangeerths/Ecommerce.API.git
+cd Ecommerce.API
+```
+
 
 2. Configure your database connection string in `appsettings.json` (or `appsettings.Development.json`):
    ```json
@@ -66,55 +148,39 @@ Ecommerce.API/
    }
    ```
 
-3. Apply EF Core migrations:
-   ```bash
-   dotnet ef database update
-   ```
+## 3. Apply EF Core Migrations
 
-4. Run the API:
-   ```bash
-   dotnet run
-   ```
+From the solution directory:
 
-5. The API will be available at `https://localhost:5001` (or the port configured in `launchSettings.json`).
+```bash
+dotnet ef database update
+```
 
-## API Endpoints
+If the EF CLI tool is not installed:
 
-### Product (`/api/Product`)
+```bash
+dotnet tool install --global dotnet-ef
+```
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/Product?PageNumber=1&PageSize=10` | Get all products (paginated) |
-| GET | `/api/Product/{productId}` | Get a product by ID |
-| POST | `/api/Product` | Create a new product |
-| PUT | `/api/Product/{productId}` | Update an existing product |
-| DELETE | `/api/Product/{productId}` | Soft-delete a product |
+## 4. Build the Solution
 
-### Category (`/api/Category`)
+```bash
+dotnet build
+```
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/Category?PageNumber=1&PageSize=10` | Get all categories (paginated) |
-| GET | `/api/Category/{categoryId}` | Get a category by ID |
-| POST | `/api/Category` | Create a new category |
-| PATCH | `/api/Category/{categoryId}` | Update an existing category |
-| DELETE | `/api/Category/{categoryId}` | Soft-delete a category |
+---
 
-### Sale (`/api/Sale`)
+## 5. Run the API
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/Sale?PageNumber=1&PageSize=10` | Get all sales (paginated) |
-| GET | `/api/Sale/{saleId}` | Get a sale by ID |
-| POST | `/api/Sale` | Create a new sale |
-| PUT | `/api/Sale/{saleId}` | Update an existing sale |
-| DELETE | `/api/Sale/{saleId}` | Soft-delete a sale |
+```bash
+dotnet run --project Ecommerce.API
+```
 
-## Request/Response Models
+The API is configured for HTTPS and the current Postman collection uses:
 
-- **Product**: `name`, `description`, `price`, `stockQuantity`, `categoryId`
-- **Category**: `name`, `description`
-- **Sale**: `productId`, `quantity`, `unitPrice`, `customerName` (server computes `totalAmount` / `saleDate`)
+```text
+https://localhost:7146
+```
 
 All list endpoints return a `PagedResponse<T>` containing the items plus pagination metadata (page number, page size, total records).
 
@@ -122,13 +188,3 @@ All list endpoints return a `PagedResponse<T>` containing the items plus paginat
 
 A Postman collection (`Ecommerce.API.postman_collection.json`) covering all endpoints is included in the repo. Import it into Postman and set the `base_url` variable to match your running instance to get started quickly.
 
-## Soft Delete Behavior
-
-Delete operations across all resources are non-destructive: records are flagged with `IsDeleted = true` and `DeletedAt` is set, rather than being physically removed from the database. List and lookup queries filter out deleted records automatically.
-
-## Contributing
-
-1. Create a feature branch from `main`.
-2. Make your changes.
-3. Ensure the project builds and (if applicable) tests pass.
-4. Open a PR describing the change, including any relevant Postman collection updates.
