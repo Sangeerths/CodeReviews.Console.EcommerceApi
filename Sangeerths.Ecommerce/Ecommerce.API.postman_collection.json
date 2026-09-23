@@ -229,7 +229,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"customerName\": \"Alice Johnson\",\n  \"saleDate\": \"2025-01-01T00:00:00\",\n  \"saleItems\": [\n    {\n      \"productId\": 1,\n      \"quantity\": 2,\n      \"unitPrice\": 999.99\n    }\n  ]\n}"
+              "raw": "{\n  \"customerName\": \"Alice Johnson\",\n  \"saleDate\": \"2025-01-01T00:00:00\",\n  \"Items\": [\n    {\n      \"productId\": 2,\n      \"quantity\": 2,\n      \"unitPrice\": 999.99\n    }\n  ]\n}"
             },
             "url": {
               "raw": "{{baseUrl}}/api/Sale",
@@ -247,7 +247,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"customerName\": \"Alice Johnson Updated\",\n  \"saleDate\": \"2025-01-02T00:00:00\",\n  \"saleItems\": [\n    {\n      \"productId\": 1,\n      \"quantity\": 3,\n      \"unitPrice\": 999.99\n    }\n  ]\n}"
+              "raw": "{\n  \"customerName\": \"Alice Johnson Updated\",\n  \"saleDate\": \"2025-01-02T00:00:00\",\n  \"Items\": [\n    {\n      \"productId\": 2,\n      \"quantity\": 3,\n      \"unitPrice\": 999.99\n    }\n  ]\n}"
             },
             "url": {
               "raw": "{{baseUrl}}/api/Sale/{{saleId}}",
